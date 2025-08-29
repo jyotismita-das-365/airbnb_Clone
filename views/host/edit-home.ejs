@@ -4,8 +4,8 @@
   <%- include('../partials/nav') %>
     <h1 class="text-4xl font-bold text-blue-600 mb-8 text-center mt-8"><%= editing ? "Edit" : "Add"%> your Home</h1>
     <div class="flex justify-center">
-      <form action="/host/<%= editing ? "edit-home" : "add-home"%>" method="POST" class="w-full max-w-md">
-        <input type="hidden" name="id" value="<%= editing ? home.id : ''%>" />
+      <form action="/host/<%= editing ? "edit-home" : "add-home"%>" method="POST" enctype="multipart/form-data" class="w-full max-w-md">
+        <input type="hidden" name="id" value="<%= editing ? home._id : ''%>" />
         <input 
           type="text" 
           name="houseName"
@@ -35,12 +35,16 @@
           class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
         />
         <input 
-          type="text" 
-          name="photoUrl"
-          value="<%= editing ? home.photoUrl : ''%>"
-          placeholder="Upload a photo"
+          type="file" 
+          name="photo"
           class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
         />
+        <textarea
+          name="description"
+          placeholder="Describe your house"
+          class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          rows="4"
+        ><%= editing ? home.description : '' %></textarea>
         <div class="flex justify-center">
           <input 
             type="submit" 

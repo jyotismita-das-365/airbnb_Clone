@@ -1,58 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const rootDir = require('./../util/path-util');
-const Favourite = require('./Favourite');
+const mongoose = require('mongoose');
 
-const homeFilePath = path.join(rootDir, 'data', 'homes.json');
-
-module.exports = class Home {
-  constructor(houseName, price, location, rating, photoUrl) {
-    this.houseName = houseName;
-    this.price = price;
-    this.location = location;
-    this.rating = rating;
-    this.photoUrl = photoUrl;
+const homeSchema = new mongoose.Schema({
+  houseName : {type: String, required: true},
+  price: {type: Number, required: true},
+  location: {type: String, required: true},
+  rating: {type: Number, required: true},
+  photoUrl: String,
+  description: String,
+  host: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   }
+});
 
-  save(callback) {
-    Home.fetchAll(registeredHomes => {
-      if (this.id) { // edit case
-        registeredHomes = registeredHomes.map(home => home.id !== this.id ? home : this);
-      } else { // new case
-        this.id = Math.random().toString();
-        registeredHomes.push(this);
-      }
-      fs.writeFile(homeFilePath, JSON.stringify(registeredHomes), callback);
-    });
-  }
-
-  static fetchAll(callback) {
-    fs.readFile(homeFilePath, (err, data) => {
-      if (err) {
-        callback([]);
-      } else {
-        callback(JSON.parse(data));
-      }
-    })
-  }
-
-  static findById(homeId, callback) {
-    Home.fetchAll(homes => {
-      const home = homes.find(home => home.id === homeId);
-      callback(home);
-    })
-  }
-
-  static deleteById(homeId, callback) {
-    Home.fetchAll(homes => {
-      const newHomes = homes.filter(home => home.id !== homeId);
-      fs.writeFile(homeFilePath, JSON.stringify(newHomes), error => {
-        if (error) {
-          callback(error);
-          return;
-        }
-        Favourite.deleteById(homeId, callback);
-      });
-    })
-  }
-}
+module.exports = mongoose.model("Home", homeSchema);
