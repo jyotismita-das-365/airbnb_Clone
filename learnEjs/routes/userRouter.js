@@ -1,12 +1,11 @@
-//Core Module
+// Core Modules
 const path = require('path');
 
-//External module
+// External Module
 const express = require('express');
 const userRouter = express.Router();
 
-//Local Module
-const rootDir = require('../utils/pathUtil');
+// Local Module
 const { registeredHomes } = require('./hostRouter');
 
 userRouter.get("/", (req, res, next) => {
