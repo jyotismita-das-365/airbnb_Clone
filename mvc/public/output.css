@@ -588,10 +588,6 @@ video {
   }
 }
 
-.col-span-full {
-  grid-column: 1 / -1;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -695,6 +691,11 @@ video {
   border-width: 1px;
 }
 
+.bg-green-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 239 172 / var(--tw-bg-opacity, 1));
+}
+
 .bg-red-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
@@ -713,6 +714,10 @@ video {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .p-4 {

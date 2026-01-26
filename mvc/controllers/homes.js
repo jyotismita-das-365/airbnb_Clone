@@ -4,13 +4,13 @@ exports.getAddHome = (req, res, next) => {
   res.render('host/addHome', {pageTitle: 'Add Home to airbnb', currentPage: 'addHome'});
 };
 
-exports.postAddHome = (req, res, next) => {
+exports.postddHome = (req, res, next) => {
   const {houseName, price, location, rating, photoUrl} = req.body;
 
   const home = new Home(houseName, price, location, rating, photoUrl);
   home.save();
 
-  res.render('host/homeAdded', {pageTitle: 'Home Added Successfully', currentPage: 'homeAdded'});
+  res.render('host/home-added', {pageTitle: 'Home Added Successfully', currentPage: 'homeAdded'});
 };
 
 exports.getHomes = (req, res, next) => {
