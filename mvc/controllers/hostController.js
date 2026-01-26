@@ -4,7 +4,15 @@ exports.getAddHome = (req, res, next) => {
   res.render('host/addHome', {pageTitle: 'Add Home to airbnb', currentPage: 'addHome'});
 };
 
-exports.postddHome = (req, res, next) => {
+exports.getHostHomes = (req, res, next) => {
+  const registeredHomes = Home.fetchAll(registeredHomes => 
+    res.render('host/host-home-list', {
+      registeredHomes: registeredHomes, 
+      pageTitle: 'Host Homes List', 
+      currentPage: 'host-homes'}));
+};
+
+exports.postAddHome = (req, res, next) => {
   const {houseName, price, location, rating, photoUrl} = req.body;
 
   const home = new Home(houseName, price, location, rating, photoUrl);
@@ -13,7 +21,3 @@ exports.postddHome = (req, res, next) => {
   res.render('host/home-added', {pageTitle: 'Home Added Successfully', currentPage: 'homeAdded'});
 };
 
-exports.getHomes = (req, res, next) => {
-  const registeredHomes = Home.fetchAll(registeredHomes => 
-    res.render('store/home-list', {registeredHomes: registeredHomes, pageTitle: 'airbnb Home', currentPage: 'Home'}));
-}
