@@ -1,26 +1,27 @@
-const mongo = require("mongodb");
+const mongo = require('mongodb');
 
 const MongoClient = mongo.MongoClient;
 
-const MONGO_URL = "mongodb+srv://root:root@jyoti.icqiemi.mongodb.net/?appName=jyoti"
+const MONGO_URL = "mongodb+srv://root:root@cluster0.negmuag.mongodb.net/?appName=Cluster0";
 
 let _db;
 
 const mongoConnect = (callback) => {
-  MongoClient.connect(MONGO_URL).then(client => {
-  callback();
-  _db = client.db('airbnb');
-}).catch(err => {
-  console.log("error while connecting to mongo", err);
-});
+  MongoClient.connect(MONGO_URL)
+  .then(client => {
+    callback();
+    _db = client.db('airbnb');
+  }).catch(err => {
+    console.log('Error while connecting to Mongo: ', err);
+  });
 }
 
 const getDB = () => {
-  if(!_db) {
-    throw new Error('Mongo not Connected');
+  if (!_db) {
+    throw new Error('Mongo not connected');
   }
   return _db;
 }
 
-module.exports = mongoConnect;
-module.exports = getDB;
+exports.mongoConnect = mongoConnect;
+exports.getDB = getDB;

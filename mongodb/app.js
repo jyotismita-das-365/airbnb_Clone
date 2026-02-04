@@ -26,10 +26,7 @@ app.use(errorsController.pageNotFound);
 
 const PORT = 3000;
 mongoConnect(() => {
-  console.log(client);
   app.listen(PORT, () => {
-  console.log(`Server running on address http://localhost:${PORT}`);
-});
+    console.log(`Server running on address http://localhost:${PORT}`);
+  });
 })
-
-// try to see the error after update
