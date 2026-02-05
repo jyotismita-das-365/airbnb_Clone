@@ -2,7 +2,7 @@ const mongo = require('mongodb');
 
 const MongoClient = mongo.MongoClient;
 
-const MONGO_URL = "mongodb+srv://root:root@cluster0.negmuag.mongodb.net/?appName=Cluster0";
+const MONGO_URL = "mongodb+srv://root:root@airbnb.yqpustn.mongodb.net/?appName=airbnb";
 
 let _db;
 
